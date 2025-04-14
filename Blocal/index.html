@@ -18,7 +18,6 @@
                     <i class="fa-solid fa-magnifying-glass"></i>   
                 </div>
                 <li><a href="profile.html"  class="fa-regular fa-user" ></a></li>
-                <li><a href="orderreturn.html">Order/Return</a></li>
                 <li><a href="help.html">Help Center</a></li>
                 <li><a href="cart.html"  class="fa-solid fa-cart-shopping"></a></li>
 
@@ -33,33 +32,126 @@
         <button id="introbutton">Shop Now</button> 
     </section>
 
-    <section id="inseason">
-        <h2>In Season</h2>
-        <div class="product" data-id="1" data-name="Tomato" data-price="2">
-            <h3>Tomato</h3>
-            <p>Price: $2</p>
-            <button class="add-to-cart">Add to Cart</button>
+    <section class="product-showcase">
+        <h2 class="section-title">Featured Products</h2>
+      
+        <!-- Fruits Section -->
+        <div class="category-block">
+          <h3 class="category-title">Fruits</h3>
+          <div class="product-grid">
+            <div class="product-card" data-id="fruit1" data-name="Apple" data-price="1.50">
+              <img src="assets/images/apple.jpg" alt="Apple">
+              <h4>Apple</h4>
+              <p>$1.50</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="fruit2" data-name="Banana" data-price="0.80">
+              <img src="assets/images/banana.jpg" alt="Banana">
+              <h4>Banana</h4>
+              <p>$0.80</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="fruit3" data-name="Orange" data-price="1.20">
+              <img src="assets/images/orange.jpg" alt="Orange">
+              <h4>Orange</h4>
+              <p>$1.20</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
         </div>
-        <div class="product" data-id="2" data-name="Potato" data-price="1">
-            <h3>Potato</h3>
-            <p>Price: $1</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <div class="product" data-id="3" data-name="Carrot" data-price="1.5">
-            <h3>Carrot</h3>
-            <p>Price: $1.5</p>
-            <button class="add-to-cart">Add to Cart</button>            
-        </div>
-        <div class="product" data-id="4" data-name="Broccoli" data-price="2.5">
-            <h3>Broccoli</h3>
-            <p>Price: $2.5</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
+      
+        <!-- Vegetables Section -->
+        <div class="category-block">
+          <h3 class="category-title">Vegetables</h3>
+          <div class="product-grid">
+            <div class="product-card" data-id="veg1" data-name="Carrot" data-price="0.60">
+              <img src="assets/images/carrot.jpg" alt="Carrot">
+              <h4>Carrot</h4>
+              <p>$0.60</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="veg2" data-name="Tomato" data-price="0.75">
+              <img src="assets/images/tomato.jpg" alt="Tomato">
+              <h4>Tomato</h4>
+              <p>$0.75</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="veg3" data-name="Broccoli" data-price="1.00">
+              <img src="assets/images/broccoli.jpg" alt="Broccoli">
+              <h4>Broccoli</h4>
+              <p>$1.00</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>         
     </section>
+
+    <section class="product-categories">
+        <h2 class="section-title">Explore More</h2>
+      
+        <!-- Season's Best -->
+        <div class="category-block">
+          <h3 class="category-title">🌱 Season's Best Picks</h3>
+          <div class="product-grid">
+            <div class="product-card" data-id="season1" data-name="Strawberries" data-price="2.50">
+              <img src="assets/images/strawberries.jpg" alt="Strawberries">
+              <h4>Strawberries</h4>
+              <p>$2.50</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="season2" data-name="Mangoes" data-price="3.00">
+              <img src="assets/images/mango.jpg" alt="Mango">
+              <h4>Mango</h4>
+              <p>$3.00</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Most Bought -->
+        <div class="category-block">
+          <h3 class="category-title">🔥 Most Bought</h3>
+          <div class="product-grid">
+            <div class="product-card" data-id="bought1" data-name="Tomato" data-price="0.75">
+              <img src="assets/images/tomato.jpg" alt="Tomato">
+              <h4>Tomato</h4>
+              <p>$0.75</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="bought2" data-name="Banana" data-price="0.80">
+              <img src="assets/images/banana.jpg" alt="Banana">
+              <h4>Banana</h4>
+              <p>$0.80</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Top Featured -->
+        <div class="category-block">
+          <h3 class="category-title">⭐ Top Featured</h3>
+          <div class="product-grid">
+            <div class="product-card" data-id="feature1" data-name="Broccoli" data-price="1.00">
+              <img src="assets/images/broccoli.jpg" alt="Broccoli">
+              <h4>Broccoli</h4>
+              <p>$1.00</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product-card" data-id="feature2" data-name="Apple" data-price="1.50">
+              <img src="assets/images/apple.jpg" alt="Apple">
+              <h4>Apple</h4>
+              <p>$1.50</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
 
     <footer>
         <p>&copy; 2025 Vegetable Store</p>
     </footer>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
 

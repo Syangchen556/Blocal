@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="styles/seller.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Seller Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <div class="search-container">
+                    <input type="text" placeholder="Search" name="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>   
+                </div>
+                <li><a href="profile.html"  class="fa-regular fa-user" ></a></li>
+                <li><a href="help.html">Help Center</a></li>
+                <li><a href="cart.html"  class="fa-solid fa-cart-shopping"></a></li>
+                <li><a href="logout.html">Logout</a></li>
+                <li><a href="seller-dashboard.html" class="active">Seller Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="dashboard-container">
+        <aside>
+            <ul>
+                <li><a href="#product-listing">Product Listings</a></li>
+                <li><a href="#manage-orders">Manage Orders</a></li>
+                <li><a href="#shop-settings">Shop Settings</a></li>
+                <li><a href="#sales-earnings">Sales & Earnings</a></li>
+            </ul>
+        </aside>
+        
+        <main>
+            <section id="product-listing">
+                <h2>Product Listings</h2>
+                <button onclick="addProduct()">Add New Product</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list">
+                        <!-- Product listings will be populated here -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="manage-orders">
+                <h2>Manage Orders</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Buyer</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-management">
+                        <!-- Orders will be populated here -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="shop-settings">
+                <h2>Shop Settings</h2>
+                <form id="shop-form">
+                    <input type="text" placeholder="Shop Name" id="shop-name" required />
+                    <input type="email" placeholder="Email" id="shop-email" required />
+                    <button type="submit">Update Shop</button>
+                </form>
+            </section>
+
+            <section id="sales-earnings">
+                <h2>Sales & Earnings</h2>
+                <div id="sales-data">
+                    <!-- Sales and earnings data will appear here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>

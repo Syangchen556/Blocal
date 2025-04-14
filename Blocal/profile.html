@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Profile - Vegetable Store</title>
+    <title>Profile - Blocal</title>
+    <link rel="stylesheet" href="styles/profiles.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header>
@@ -17,32 +18,74 @@
                     <input type="text" placeholder="Search" name="search">
                     <i class="fa-solid fa-magnifying-glass"></i>   
                 </div>
-                <li><a href="profile.html"  class="fa-regular fa-user" ></a></li>
-                <li><a href="orderreturn.html">Order/Return</a></li>
+                <li><a href="profile.html" class="fa-regular fa-user"></a></li>
                 <li><a href="help.html">Help Center</a></li>
-                <li><a href="cart.html"  class="fa-solid fa-cart-shopping"></a></li>
+                <li><a href="cart.html" class="fa-solid fa-cart-shopping"></a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section class="profile-container">
-            <h2>Welcome, User</h2>
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="John Doe" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="johndoe@example.com" required>
-                
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                
-                <button type="submit">Update Profile</button>
-            </form>
-        </section>
+        <div class="profile-container">
+            <!-- Tabs to toggle between Buyer and Seller Forms -->
+            <div class="tabs">
+                <button class="tab-link active" data-role="buyer">Buyer</button>
+                <button class="tab-link" data-role="seller">Seller</button>
+            </div>
+
+            <!-- Buyer Forms (Login/Sign-Up) -->
+            <div id="buyer" class="form-container active">
+                <form id="buyer-login">
+                    <h3>Buyer Login</h3>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="form-switch">
+                    Don’t have an account? <a onclick="switchForm('buyer-signup')">Sign Up</a>
+                </div>
+                <form id="buyer-signup" class="hidden-form">
+                    <h3>Buyer Sign Up</h3>
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <div class="form-switch hidden-form" id="buyer-switch-back">
+                    Already have an account? <a onclick="switchForm('buyer-login')">Login</a>
+                </div>
+            </div>
+
+            <!-- Seller Forms (Login/Sign-Up) -->
+            <div id="seller" class="form-container">
+                <form id="seller-login">
+                    <h3>Seller Login</h3>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="form-switch">
+                    Don’t have an account? <a onclick="switchForm('seller-signup')">Sign Up</a>
+                </div>
+                <form id="seller-signup" class="hidden-form">
+                    <h3>Seller Sign Up</h3>
+                    <input type="text" placeholder="Shop Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <div class="form-switch hidden-form" id="seller-switch-back">
+                    Already have an account? <a onclick="switchForm('seller-login')">Login</a>
+                </div>
+            </div>
+
+            <!-- Dynamic Dashboard Link Container -->
+            <div id="dashboard-link-container">
+                <!-- Dashboard link will be added here if the user is logged in -->
+            </div>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2025 Vegetable Store</p>
-    </footer>
+
+    <script src="scripts/profile.js"></script>
 </body>
 </html>
