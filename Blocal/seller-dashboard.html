@@ -12,19 +12,21 @@
     <header>
         <h1>Seller Dashboard</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <div class="search-container">
-                    <input type="text" placeholder="Search" name="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>   
-                </div>
-                <li><a href="profile.html"  class="fa-regular fa-user" ></a></li>
-                <li><a href="help.html">Help Center</a></li>
-                <li><a href="cart.html"  class="fa-solid fa-cart-shopping"></a></li>
-                <li><a href="logout.html">Logout</a></li>
-                <li><a href="seller-dashboard.html" class="active">Seller Dashboard</a></li>
+            <ul id="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li id="seller-only" style="display: none;"><a href="orders.html">Orders & Returns</a></li>
+              <li><a href="help.html">Help Center</a></li>
+              <li><a href="Blog.html" class="active">Blog</a></li>
+              <li id="role-link"></li>
+              <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
-        </nav>
+          
+            <!-- Moved outside the <ul> -->
+            <div class="search-container">
+              <input type="text" placeholder="Search" name="search">
+              <i class="fa-solid fa-magnifying-glass"></i>   
+            </div>
+          </nav>
     </header>
     
     <div class="dashboard-container">
@@ -90,7 +92,43 @@
             </section>
         </main>
     </div>
+    <li><a href="#" onclick="logout()">Logout</a></li>
+
+    <script>
+        function updateNavbarRoleLink() {
+          const role = localStorage.getItem("userRole");
+          const roleLink = document.getElementById("role-link");
+          const authLink = document.getElementById("auth-link");
+          const sellerNav = document.getElementById("seller-only");
+    
+          if (role === "buyer") {
+            roleLink.innerHTML = '<a href="buyer-dashboard.html"><i class="fa-regular fa-user"></i> Buyer Dashboard</a>';
+            const cartItem = document.createElement("li");
+            cartItem.innerHTML = '<a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a>';
+            document.getElementById("nav-links").insertBefore(cartItem, roleLink);
+            if (sellerNav) sellerNav.style.display = "none";
+            authLink.innerHTML = '<a href="#" onclick="logout()">Logout</a>';
+          } else if (role === "seller") {
+            roleLink.innerHTML = '<a href="seller-dashboard.html"><i class="fa-regular fa-user"></i> Seller Dashboard</a>';
+            if (sellerNav) sellerNav.style.display = "list-item";
+            authLink.innerHTML = '<a href="#" onclick="logout()">Logout</a>';
+          } else {
+            roleLink.innerHTML = '<a href="profile.html"><i class="fa-regular fa-user"></i> Login</a>';
+            authLink.innerHTML = ''; // Hide logout when not logged in
+          }
+        }
+    
+        function logout() {
+          localStorage.removeItem("userRole");
+          window.location.href = "index.html";
+        }
+    
+        window.addEventListener("DOMContentLoaded", updateNavbarRoleLink);
+    </script>
+    
 
     <script src="scripts/dashboard.js"></script>
+    <script src="scripts/navbar-role.js"></script>
+
 </body>
 </html>

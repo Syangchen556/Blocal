@@ -1,72 +1,41 @@
-// Sample products available for the buyer
-const availableProducts = [
-    { name: 'Tomato', price: '$2' },
-    { name: 'Potato', price: '$1' },
-    { name: 'Carrot', price: '$1.5' },
-];
+// Function to update the navigation bar based on the user role
+function updateNavBar() {
+    const userRole = localStorage.getItem('userRole'); // Get user role from localStorage
+    const navbar = document.getElementById('navbar');  // Get navbar container
 
-// Store favorites in the browser's localStorage (persist data across sessions)
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    // Clear existing navbar links (if any)
+    navbar.innerHTML = '';
 
-// Load favorite products dynamically on page load
-function loadFavorites() {
-    const favoritesList = document.getElementById('favorites-list');
-    favoritesList.innerHTML = ''; // Clear the list before reloading
-    favorites.forEach(favorite => {
-        const li = document.createElement('li');
-        li.innerHTML = `${favorite.name} - ${favorite.price} <button onclick="removeFromFavorites('${favorite.name}')">Remove</button>`;
-        favoritesList.appendChild(li);
-    });
-}
-
-// Add product to favorites
-function addToFavorites(productName) {
-    // Check if product is already in favorites
-    const existingProduct = favorites.find(fav => fav.name === productName);
-    if (existingProduct) {
-        alert('This product is already in your favorites!');
-        return;
-    }
-
-    // Find product from availableProducts list
-    const product = availableProducts.find(p => p.name === productName);
-    if (product) {
-        favorites.push(product);
-        localStorage.setItem('favorites', JSON.stringify(favorites)); // Save to localStorage
-        loadFavorites(); // Reload the list of favorites
-    }
-}
-
-// Remove product from favorites
-function removeFromFavorites(productName) {
-    favorites = favorites.filter(fav => fav.name !== productName);
-    localStorage.setItem('favorites', JSON.stringify(favorites)); // Update localStorage
-    loadFavorites(); // Reload the list of favorites
-}
-
-// Clear all favorites
-document.getElementById('clear-favorites').addEventListener('click', () => {
-    favorites = [];
-    localStorage.removeItem('favorites');
-    loadFavorites();
-});
-
-// Load the initial favorites list when the page loads
-loadFavorites();
-
-// For each available product, add an "Add to Favorites" button
-function loadAvailableProducts() {
-    const productContainer = document.getElementById('available-products');
-    availableProducts.forEach(product => {
-        const div = document.createElement('div');
-        div.className = 'product-item';
-        div.innerHTML = `
-            <span>${product.name} - ${product.price}</span>
-            <button onclick="addToFavorites('${product.name}')">Add to Favorites</button>
+    // Define navigation links based on user role
+    if (userRole === 'buyer') {
+        // If the user is a buyer, add buyer-specific links
+        navbar.innerHTML = `
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="blog.html">Blog</a></li>
         `;
-        productContainer.appendChild(div);
-    });
+    } else if (userRole === 'seller') {
+        // If the user is a seller, add seller-specific links
+        navbar.innerHTML = `
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="orders.html">Orders & Returns</a></li>
+            <li><a href="blog.html">Blog</a></li>
+        `;
+    } else {
+        // Default state if no role is found (e.g., logged out)
+        navbar.innerHTML = `
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        `;
+    }
 }
 
-// Call to load available products on page load
-if (document.getElementById('available-products')) loadAvailableProducts();
+// Execute the function on page load to update the nav bar based on the user role
+window.onload = function() {
+    updateNavBar();
+};

@@ -236,7 +236,25 @@ nav ul li a:hover::after {
     }
 }
 
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+}
 
+.scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: #555;
+}
 
 
 footer {
@@ -245,3 +263,4 @@ footer {
     background-color: #4CAF50;
     color: white;
 }
+

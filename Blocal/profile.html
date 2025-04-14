@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Blocal</title>
-    <link rel="stylesheet" href="styles/profiles.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile - Blocal</title>
+  <link rel="stylesheet" href="styles/profiles.css"/>
+  <link rel="stylesheet" href="styles/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
-    <header>
-        <h1>User Profile</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <div class="search-container">
-                    <input type="text" placeholder="Search" name="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>   
-                </div>
-                <li><a href="profile.html" class="fa-regular fa-user"></a></li>
-                <li><a href="help.html">Help Center</a></li>
-                <li><a href="cart.html" class="fa-solid fa-cart-shopping"></a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>User Profile</h1>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="orders.html">Orders & Returns</a></li>
+        <li><a href="help.html">Help Center</a></li>
+        <li><a href="Blog.html" class="active">Blog</a></li>
+        <li id="role-link"></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    
+      <!-- Moved outside the <ul> -->
+      <div class="search-container">
+        <input type="text" placeholder="Search" name="search">
+        <i class="fa-solid fa-magnifying-glass"></i>   
+      </div>
+    </nav>
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign Up</button>
+  </header>
 
-    <main>
-        <div class="profile-container">
-            <!-- Tabs to toggle between Buyer and Seller Forms -->
-            <div class="tabs">
-                <button class="tab-link active" data-role="buyer">Buyer</button>
-                <button class="tab-link" data-role="seller">Seller</button>
-            </div>
+  <!-- Modal for login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="loginModal">&times;</span>
+      <form id="loginForm">
+        <h3>Login</h3>
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <select id="loginRole">
+          <option value="buyer">Buyer</option>
+          <option value="seller">Seller</option>
+        </select>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
 
-            <!-- Buyer Forms (Login/Sign-Up) -->
-            <div id="buyer" class="form-container active">
-                <form id="buyer-login">
-                    <h3>Buyer Login</h3>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                <div class="form-switch">
-                    Don’t have an account? <a onclick="switchForm('buyer-signup')">Sign Up</a>
-                </div>
-                <form id="buyer-signup" class="hidden-form">
-                    <h3>Buyer Sign Up</h3>
-                    <input type="text" placeholder="Full Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button type="submit">Sign Up</button>
-                </form>
-                <div class="form-switch hidden-form" id="buyer-switch-back">
-                    Already have an account? <a onclick="switchForm('buyer-login')">Login</a>
-                </div>
-            </div>
+  <!-- Modal for signup -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="signupModal">&times;</span>
+      <form id="signupForm">
+        <h3>Sign Up</h3>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
 
-            <!-- Seller Forms (Login/Sign-Up) -->
-            <div id="seller" class="form-container">
-                <form id="seller-login">
-                    <h3>Seller Login</h3>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                <div class="form-switch">
-                    Don’t have an account? <a onclick="switchForm('seller-signup')">Sign Up</a>
-                </div>
-                <form id="seller-signup" class="hidden-form">
-                    <h3>Seller Sign Up</h3>
-                    <input type="text" placeholder="Shop Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button type="submit">Sign Up</button>
-                </form>
-                <div class="form-switch hidden-form" id="seller-switch-back">
-                    Already have an account? <a onclick="switchForm('seller-login')">Login</a>
-                </div>
-            </div>
+  <!-- Role Switcher -->
+  <section class="switcher">
+    <h2>Switch Role</h2>
+    <select id="role-switcher">
+      <option value="buyer">Go to Buyer Dashboard</option>
+      <option value="seller">Go to Seller Dashboard</option>
+    </select>
+    <button onclick="switchRole()">Go</button>
+  </section>
+  <li><a href="#" onclick="logout()">Logout</a></li>
 
-            <!-- Dynamic Dashboard Link Container -->
-            <div id="dashboard-link-container">
-                <!-- Dashboard link will be added here if the user is logged in -->
-            </div>
-        </div>
-    </main>
+    <script>
+    function logout() {
+        localStorage.removeItem("userRole");
+        window.location.href = "index.html";
+    }
+    </script>
+
+
+  <footer>
+    <p>&copy; 2025 Vegetable Store</p>
+  </footer>
 
     <script src="scripts/profile.js"></script>
+    <script src="scripts/navbar-role.js"></script>
+
+    
 </body>
 </html>

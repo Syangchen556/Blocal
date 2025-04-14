@@ -1,8 +1,10 @@
 // Cart and Order Elements
-const cart = [];
 const cartItemsElement = document.getElementById('cart-items');
 const totalPriceElement = document.getElementById('total-price');
 const orderItemsElement = document.getElementById('order-items');
+
+// Load Cart from LocalStorage and initialize it
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Add to Cart Functionality
 document.querySelectorAll('.add-to-cart').forEach(button => {
@@ -95,10 +97,6 @@ function updateCart() {
 
 // Load Cart from LocalStorage and display cart items
 window.addEventListener('load', () => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    savedCart.forEach(item => {
-        cart.push(item);
-    });
     renderCart();
 });
 
@@ -130,32 +128,7 @@ function showNotification(message) {
     }, 3000);
 }
 
-
-
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// Add to cart button functionality
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        const product = button.closest('.product-card'); // Assuming this class wraps each product
-        const id = product.getAttribute('data-id');
-        const name = product.getAttribute('data-name');
-        const price = parseFloat(product.getAttribute('data-price'));
-
-        const existingItem = cart.find(item => item.id === id);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ id, name, price, quantity: 1 });
-        }
-
-        // Save and update
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert(`${name} added to cart!`);
-        updateCartIcon(); // Optional function to update cart icon count
-    });
-});
-
+// Optional: update cart icon with the total item count
 function updateCartIcon() {
     const cartIcon = document.getElementById('cart-count');
     if (cartIcon) {
@@ -166,3 +139,5 @@ function updateCartIcon() {
 
 // Initialize icon count on load
 window.addEventListener('load', updateCartIcon);
+
+

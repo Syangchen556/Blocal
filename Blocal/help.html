@@ -6,36 +6,120 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Contact - Vegetable Store</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/help-center.css">
 </head>
 <body>
     <header>
-        <h1>Contact Us</h1>
+        <h1>Help Center</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <div class="search-container">
-                    <input type="text" placeholder="Search" name="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>   
-                </div>
-                <li><a href="profile.html"  class="fa-regular fa-user" ></a></li>
-                <li><a class="active" href="help.html">Help Center</a></li>
-                <li><a href="cart.html"  class="fa-solid fa-cart-shopping"></a></li>
-            </ul>
+          <ul id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="orders.html">Orders & Returns</a></li>
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="Blog.html" class="active">Blog</a></li>
+            <li id="role-link"></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+          </ul>
+        
+          <!-- Moved outside the <ul> -->
+          <div class="search-container">
+            <input type="text" placeholder="Search" name="search">
+            <i class="fa-solid fa-magnifying-glass"></i>   
+          </div>
         </nav>
     </header>
     <main>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </main>
+
+        <h1>Help Center</h1>
+        <p>We're here to help. Search for a topic or browse common questions.</p>
+        <input type="text" id="search-bar" placeholder="Search help topics..." />
+
+        <!-- Basic Instructions -->
+        <section class="instructions">
+          <h2>Getting Started</h2>
+          <ul>
+            <li>🔍 <strong>Browse Products:</strong> Use the main menu to explore categories.</li>
+            <li>🛒 <strong>Add to Cart:</strong> Click "Add to Cart" under any item you wish to purchase.</li>
+            <li>📦 <strong>Track Orders:</strong> Go to “My Orders” in your account dashboard.</li>
+            <li>↩️ <strong>Request Returns:</strong> Use the return option next to delivered items.</li>
+            <li>📞 <strong>Need Help?</strong> Contact support at <a href="mailto:support@veggieshop.com">support@veggieshop.com</a>.</li>
+          </ul>
+        </section>
+    
+        <!-- Most Asked Questions -->
+        <section class="faq" id="faq-list">
+          <h2>Most Asked Questions</h2>
+    
+          <div class="faq-item">
+            <button class="faq-question">
+                How do I track my order?
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Log into your account, click on “My Orders”, and select the order you want to track. You'll see a real-time status update.</p>
+            </div>
+          </div>
+    
+          <div class="faq-item">
+            <button class="faq-question">
+                What is your return policy?
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>You can request a return within 7 days after delivery. Go to "My Orders" and click "Request Return" next to the item.</p>
+            </div>
+          </div>
+    
+          <div class="faq-item">
+            <button class="faq-question">
+                Can I cancel an order after placing it?
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! You can cancel your order anytime before it is shipped. Go to "My Orders" and hit "Cancel" next to the order.</p>
+            </div>
+          </div>
+    
+          <div class="faq-item">
+            <button class="faq-question">
+                How do I make a payment?
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>We accept cards, mobile payments, and cash on delivery. Choose your preferred option during checkout.</p>
+            </div>
+          </div>
+    
+          <div class="faq-item">
+            <button class="faq-question">
+                My payment failed. What should I do?
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Retry payment or check if your bank has blocked the transaction. You can also contact support for assistance.</p>
+            </div>
+          </div>
+    
+          <div class="faq-item">
+            <button class="faq-question">
+                How do I contact customer support?
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Email us at <strong>support@veggieshop.com</strong> or call us at <strong>+123-456-7890</strong> (9 AM - 6 PM, Mon–Sat).</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
     <footer>
         <p>&copy; 2025 Vegetable Store</p>
     </footer>
+
+    <script src="scripts/help-center.js"></script>
+    <script src="scripts/navbar-role.js"></script>
+
+    
+
 </body>
 </html>
