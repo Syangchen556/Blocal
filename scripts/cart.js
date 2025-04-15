@@ -24,24 +24,29 @@ function updateCart() {
     let totalPrice = 0;
     cart.forEach(item => {
         // Create a row for each cart item
-        const row = document.createElement('tr');
-        
-        // Product Image, Name, Quantity, Price, and Remove Button
-        row.innerHTML = `
-            <td><img src="${item.image}" alt="${item.name}" class="cart-item-img"></td>
-            <td class="item-name">${item.name}</td>
-            <td>
-                <div class="quantity-control">
+        const li = document.createElement('li');
+            li.className = 'cart-item';
+            li.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-img" />
+            <div class="item-details">
+                <div class="item-name">${item.name}</div>
+                <div class="item-meta">
+                <span>Qty: 
+                    <span class="quantity-control">
                     <button class="decrease-btn" data-id="${item.id}">-</button>
                     <span class="quantity-display">${item.quantity}</span>
                     <button class="increase-btn" data-id="${item.id}">+</button>
+                    </span>
+                </span>
+                <span>Price: $${item.price.toFixed(2)}</span>
+                <span>Total: $${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
-            </td>
-            <td class="item-price">$${(item.price * item.quantity).toFixed(2)}</td>
-            <td><button class="remove-btn" data-id="${item.id}">Remove</button></td>
-        `;
+            </div>
+            <button class="remove-btn" data-id="${item.id}">Remove</button>
+            `;
 
-        cartItemsContainer.appendChild(row);
+            cartItemsContainer.appendChild(li);
+
 
         // Update total price
         totalPrice += item.price * item.quantity;

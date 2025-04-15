@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Products - Vegetable Store</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Vegetable Store</h1>
+        <nav>
+          <ul id="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <div class="search-container">
+              <input type="text" placeholder="Search" name="search">
+              <i class="fa-solid fa-magnifying-glass"></i>   
+            </div>
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="blog.html" >Blog</a></li>
+            <li id="role-link"></li>
+            <li id="auth-link"></li>
+          </ul>
+        </nav>
+    </header>
+
+    <section id="product-listing">
+        <h2>Our Products</h2>
+        <div class="product-showcase">
+            <!-- Fruits Section -->
+            <div class="category-block">
+                <h3 class="category-title">Fruits</h3>
+                <div class="product-grid">
+                    <!-- Fruit Products -->
+                    <div class="product-card">
+                        <img src="assets/fruits/apple.jpg" alt="Apple">
+                        <h4>Apple</h4>
+                        <p>$1.50</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/fruits/banana.jpg" alt="Banana">
+                        <h4>Banana</h4>
+                        <p>$0.80</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/fruits/orange.jpg" alt="Orange">
+                        <h4>Orange</h4>
+                        <p>$1.20</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/fruits/mango.jpg" alt="Mango">
+                        <h4>Mango</h4>
+                        <p>$2.00</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/fruits/grapes.jpg" alt="Grapes">
+                        <h4>Grapes</h4>
+                        <p>$2.50</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vegetables Section -->
+            <div class="category-block">
+                <h3 class="category-title">Vegetables</h3>
+                
+                <!-- Tuber Section -->
+                <div class="subcategory-block">
+                    <h4 class="subcategory-title">Tuber Vegetables</h4>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="assets/veggie/potato.jpg" alt="Potato">
+                            <h4>Potato</h4>
+                            <p>$0.40</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/veggie/sweet-potato.jpg" alt="Sweet Potato">
+                            <h4>Sweet Potato</h4>
+                            <p>$1.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Greens Section -->
+                <div class="subcategory-block">
+                    <h4 class="subcategory-title">Greens</h4>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="assets/veggie/broccoli.jpg" alt="Broccoli">
+                            <h4>Broccoli</h4>
+                            <p>$1.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/veggie/spinach.jpg" alt="Spinach">
+                            <h4>Spinach</h4>
+                            <p>$0.90</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/veggie/kale.jpg" alt="Kale">
+                            <h4>Kale</h4>
+                            <p>$1.30</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fruit Vegetables Section -->
+                <div class="subcategory-block">
+                    <h4 class="subcategory-title">Fruit Vegetables</h4>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="assets/veggie/tomato.jpg" alt="Tomato">
+                            <h4>Tomato</h4>
+                            <p>$0.75</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/veggie/cucumber.jpg" alt="Cucumber">
+                            <h4>Cucumber</h4>
+                            <p>$0.50</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leafy Greens Section -->
+                <div class="subcategory-block">
+                    <h4 class="subcategory-title">Leafy Greens</h4>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="assets/veggie/lettuce.jpg" alt="Lettuce">
+                            <h4>Lettuce</h4>
+                            <p>$1.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/veggie/arugula.jpg" alt="Arugula">
+                            <h4>Arugula</h4>
+                            <p>$1.10</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://www.instagram.com" target="_blank">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.facebook.com" target="_blank">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+                <a href="https://twitter.com" target="_blank">
+                    <i class="fa-brands fa-twitter"></i> Twitter
+                </a>
+            </div>
+    
+            <div class="footer-contact">
+                <p><i class="fa-solid fa-envelope"></i> contact@vegetablestore.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 800 123 4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Vegetable St, Fresh City, Farm Land</p>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2025 Vegetable Store. All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/navbar-role.js"></script>
+</body>
+</html>

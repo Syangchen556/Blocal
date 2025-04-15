@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Community Blog</title>
-  <link rel="stylesheet" href="styles/blosg.css">
+  <link rel="stylesheet" href="styles/blog.css">
   <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Vegetable Store</h1>
-        <nav>
-          <ul id="nav-links">
-            <li><a href="index.html" >Home</a></li>
-            <div class="search-container">
-              <input type="text" placeholder="Search" name="search">
-              <i class="fa-solid fa-magnifying-glass"></i>   
-            </div>
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="Blog.html" class="active">Blog</a></li>
-            <li id="role-link"></li>
-            <li id="auth-link"></li>
-          </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Welcome to Vegetable Store</h1>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <div class="search-container">
+          <input type="text" placeholder="Search" name="search">
+          <i class="fa-solid fa-magnifying-glass"></i>   
+        </div>
+        <li><a href="help.html">Help Center</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li id="role-link"></li>
+        <li id="auth-link"></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <section class="blog-form">
+    <!-- Floating Plus Button -->
+    <button id="addPostBtn" title="Create Post">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <!-- Hidden Blog Form -->
+    <section class="blog-form" id="blogFormSection" style="display: none;">
       <h2>Create a Blog Post</h2>
       <form id="communityBlogForm">
         <input type="text" id="blogTitle" placeholder="Title" required />
@@ -38,17 +44,41 @@
       </form>
     </section>
 
+
     <section class="blog-posts" id="communityPosts">
       <h2>Latest Posts</h2>
-      <!-- Posts appear here -->
+      <!-- Posts will be injected here -->
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Veggie Community Blog</p>
-  </footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="https://www.instagram.com" target="_blank">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.facebook.com" target="_blank">
+                <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <i class="fa-brands fa-twitter"></i> Twitter
+            </a>
+        </div>
+
+        <div class="footer-contact">
+            <p><i class="fa-solid fa-envelope"></i> contact@vegetablestore.com</p>
+            <p><i class="fa-solid fa-phone"></i> +1 800 123 4567</p>
+            <p><i class="fa-solid fa-location-dot"></i> 123 Vegetable St, Fresh City, Farm Land</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Vegetable Store. All rights reserved.</p>
+    </div>
+</footer>
+
 
   <script src="scripts/navbar-role.js"></script>
-  <script src="scripts/community-blog.js"></script>
+  <script src="scripts/blog.js"></script>
 </body>
 </html>

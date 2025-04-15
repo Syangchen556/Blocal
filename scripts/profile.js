@@ -1,65 +1,53 @@
-// Modal Handling
-const modals = document.querySelectorAll('.modal');
-const openModalButtons = document.querySelectorAll('#loginBtn, #signupBtn');
-const closeModalButtons = document.querySelectorAll('[data-close]');
+// Toggle between login and signup
+const showLoginBtn = document.getElementById("showLogin");
+const showSignupBtn = document.getElementById("showSignup");
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
 
-openModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const targetModal = button.id === 'loginBtn' ? 'loginModal' : 'signupModal';
-        document.getElementById(targetModal).style.display = 'block';
-    });
+showLoginBtn.addEventListener("click", () => {
+  loginForm.classList.remove("hidden");
+  signupForm.classList.add("hidden");
+  showLoginBtn.classList.add("active");
+  showSignupBtn.classList.remove("active");
 });
 
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal');
-        modal.style.display = 'none';
-    });
+showSignupBtn.addEventListener("click", () => {
+  signupForm.classList.remove("hidden");
+  loginForm.classList.add("hidden");
+  showSignupBtn.classList.add("active");
+  showLoginBtn.classList.remove("active");
 });
 
-// Login Submission
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const email = loginForm.querySelector('input[type="email"]').value;
-    const role = document.getElementById('loginRole').value;
+// Handle login
+loginForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const role = document.getElementById("loginRole").value;
 
-    localStorage.setItem('userRole', role);
-    localStorage.setItem('userEmail', email);
+  localStorage.setItem("userEmail", email);
+  localStorage.setItem("userRole", role);
 
-    document.getElementById('loginModal').style.display = 'none';
-    updateNavbarAndRedirect(role);
+  // Redirect to respective dashboard
+  if (role === "buyer") {
+    window.location.href = "buyer-dashboard.html";
+  } else if (role === "seller") {
+    window.location.href = "seller-dashboard.html";
+  }
 });
 
-// Signup Submission
-const signupForm = document.getElementById('signupForm');
-signupForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    alert('Sign-up successful! Please login.');
-    document.getElementById('signupModal').style.display = 'none';
-    document.getElementById('loginModal').style.display = 'block';
+// Handle signup
+signupForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Sign-up successful! Please login.");
+  showLoginBtn.click(); // Switch to login form
 });
 
-// Redirect based on role
-function updateNavbarAndRedirect(role) {
-    if (typeof updateNavbarRoleLink === 'function') updateNavbarRoleLink();
-
-    if (role === 'buyer') {
-        window.location.href = 'buyer-dashboard.html';
-    } else if (role === 'seller') {
-        window.location.href = 'seller-dashboard.html';
-    }
-}
-
-// BONUS: Role switcher
-function switchRole() {
-    const selectedRole = document.getElementById("role-switcher").value;
-    localStorage.setItem("userRole", selectedRole);
-    updateNavbarAndRedirect(selectedRole);
-}
-
-// Auto redirect on page load
+// Optional: Auto redirect if already logged in
 window.addEventListener("DOMContentLoaded", () => {
-    const role = localStorage.getItem('userRole');
-    if (role) updateNavbarAndRedirect(role);
+  const role = localStorage.getItem("userRole");
+  if (role === "buyer") {
+    window.location.href = "buyer-dashboard.html";
+  } else if (role === "seller") {
+    window.location.href = "seller-dashboard.html";
+  }
 });
