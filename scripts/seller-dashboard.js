@@ -39,7 +39,7 @@ function viewOrderDetails(orderId) {
         alert(`
             Order ID: ${order.orderId}
             Buyer Email: ${order.email}
-            Total Price: $${order.totalPrice}
+            Total Price: Nu.${order.totalPrice}
             Order Date: ${order.orderDate}
             Items: ${order.items.map(item => `${item.name} (x${item.quantity})`).join(', ')}
         `);

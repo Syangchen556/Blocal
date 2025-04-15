@@ -1,17 +1,15 @@
-// Function to check if the user is logged in
+// Check login status from localStorage
 function isLoggedIn() {
-    return localStorage.getItem("loggedIn") === "true";  // Ensure 'true' is a string
+    return localStorage.getItem("loggedIn") === "true";
   }
   
-  // Post creation
+  // Blog post submission with login protection
   document.getElementById("communityBlogForm").addEventListener("submit", function (e) {
     e.preventDefault();
   
-    // Check if user is logged in
     if (!isLoggedIn()) {
-      alert("You must log in first to create a post.");
-      window.location.href = "profile.html";  // Redirect to login page (profile.html)
-      return;  // Stop the function if not logged in
+      alert("Please log in to post.");
+      return;
     }
   
     const title = document.getElementById("blogTitle").value.trim();
@@ -43,8 +41,10 @@ function isLoggedIn() {
   
       document.getElementById("communityPosts").prepend(post);
       setupPostEvents(post);
-      this.reset();  // Reset form after submission
+      document.getElementById("communityBlogForm").reset();
+      blogFormSection.style.display = "none"; // Hide form after posting
     };
+  
     if (file) {
       reader.readAsDataURL(file);
     } else {
@@ -52,7 +52,7 @@ function isLoggedIn() {
     }
   });
   
-  // Event handlers for post actions
+  // Set up like/comment/share actions with login checks
   function setupPostEvents(post) {
     const heartBtn = post.querySelector(".heart-btn");
     const commentBtn = post.querySelector(".comment-btn");
@@ -67,12 +67,10 @@ function isLoggedIn() {
     let likeCount = 0;
     let commentCount = 0;
   
-    // Like button functionality
     heartBtn.addEventListener("click", () => {
       if (!isLoggedIn()) {
-        alert("You must log in first to like a post.");
-        window.location.href = "profile.html";  // Redirect to login page (profile.html)
-        return;  // Stop the function if not logged in
+        alert("Please log in to like this post.");
+        return;
       }
   
       liked = !liked;
@@ -82,20 +80,17 @@ function isLoggedIn() {
       heartBtn.querySelector("i").classList.toggle("fa-solid");
     });
   
-    // Comment button functionality
     commentBtn.addEventListener("click", () => {
-      if (!isLoggedIn()) {
-        alert("You must log in first to comment on a post.");
-        window.location.href = "profile.html";  // Redirect to login page (profile.html)
-        return;  // Stop the function if not logged in
-      }
-  
       commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
     });
   
-    // Handle comment input and adding comments
     commentInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter" && commentInput.value.trim()) {
+        if (!isLoggedIn()) {
+          alert("Please log in to comment.");
+          return;
+        }
+  
         const text = commentInput.value.trim();
         const comment = document.createElement("div");
         comment.classList.add("comment-item");
@@ -108,12 +103,15 @@ function isLoggedIn() {
         commentCount++;
         commentCountSpan.textContent = commentCount;
   
-        // Comment like functionality
         const likeBtn = comment.querySelector(".comment-like");
         const likeSpan = likeBtn.querySelector("span");
         let likedComment = false;
-  
         likeBtn.addEventListener("click", () => {
+          if (!isLoggedIn()) {
+            alert("Please log in to like comments.");
+            return;
+          }
+  
           likedComment = !likedComment;
           let count = parseInt(likeSpan.textContent);
           likeSpan.textContent = likedComment ? count + 1 : count - 1;
@@ -123,7 +121,6 @@ function isLoggedIn() {
       }
     });
   
-    // Share button functionality
     shareBtn.addEventListener("click", () => {
       const dummyLink = window.location.href + "#communityPosts";
       navigator.clipboard.writeText(dummyLink);
@@ -131,11 +128,20 @@ function isLoggedIn() {
     });
   }
   
-  // Toggle blog post form visibility
+  // Toggle blog form with login check
   const addPostBtn = document.getElementById("addPostBtn");
   const blogFormSection = document.getElementById("blogFormSection");
   
   addPostBtn.addEventListener("click", () => {
+    if (!isLoggedIn()) {
+      alert("Please log in to create a blog post.");
+      return;
+    }
     blogFormSection.style.display = blogFormSection.style.display === "none" ? "block" : "none";
   });
+  
+  // Optional: Disable add post button if not logged in
+  if (!isLoggedIn()) {
+    addPostBtn.title = "Log in to create a post";
+  }
   

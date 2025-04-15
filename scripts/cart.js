@@ -15,7 +15,7 @@ function updateCart() {
         const emptyMessage = document.createElement('tr');
         emptyMessage.innerHTML = `<td colspan="5" class="empty-cart">Your cart is empty!</td>`;
         cartItemsContainer.appendChild(emptyMessage);
-        totalPriceElement.textContent = '$0.00';
+        totalPriceElement.textContent = 'NU.0.00';
         orderBtn.disabled = true;
         return;
     }
