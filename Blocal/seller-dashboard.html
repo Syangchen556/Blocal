@@ -14,18 +14,15 @@
         <nav>
             <ul id="nav-links">
               <li><a href="index.html">Home</a></li>
-              <li id="seller-only" style="display: none;"><a href="orders.html" >Orders & Returns</a></li>
+              <div class="search-container">
+                <input type="text" placeholder="Search" name="search">
+                <i class="fa-solid fa-magnifying-glass"></i>   
+              </div>
               <li><a href="help.html">Help Center</a></li>
               <li><a href="Blog.html" >Blog</a></li>
-              <li id="role-link"></li>
-              <li><a   href="#" onclick="logout()">Logout</a></li>
+              <li class="active" id="role-link"></li>
+              <li id="auth-link"></li>            
             </ul>
-          
-            <!-- Moved outside the <ul> -->
-            <div class="search-container">
-              <input type="text" placeholder="Search" name="search">
-              <i class="fa-solid fa-magnifying-glass"></i>   
-            </div>
           </nav>
     </header>
     
@@ -127,7 +124,7 @@
     </script>
     
 
-    <script src="scripts/dashboard.js"></script>
+    <script src="scripts/seller-dashboard.js"></script>
     <script src="scripts/navbar-role.js"></script>
 
 </body>

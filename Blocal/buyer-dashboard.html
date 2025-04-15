@@ -1,131 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buyer Dashboard</title>
-    <link rel="stylesheet" href="styles/buyer.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buyer Dashboard</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/buyer.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <h1>Buyer Dashboard</h1>
-        <nav>
-            <ul id="nav-links">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="help.html">Help Center</a></li>
-              <li><a href="Blog.html" >Blog</a></li>
-              <li id="role-link"></li>
-              <li><a href="#" onclick="logout()">Logout</a></li>
-            </ul>
-          
-            <!-- Moved outside the <ul> -->
-            <div class="search-container">
-              <input type="text" placeholder="Search" name="search">
-              <i class="fa-solid fa-magnifying-glass"></i>   
-            </div>
-          </nav>
-    </header>
-    
-    <div class="dashboard-container">
-        <aside>
-            <ul>
-                <li><a href="#order-history">Order History</a></li>
-                <li><a href="#track-orders">Track Orders</a></li>
-                <li><a href="#profile-settings">Profile Settings</a></li>
-                <li><a href="#favorites">Favorites</a></li>
-            </ul>
-        </aside>
-        
-        <main>
-            <section id="order-history">
-                <h2>Order History</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Product</th>
-                            <th>Status</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody id="order-history-table">
-                        <!-- Order data will be populated here -->
-                    </tbody>
-                </table>
-            </section>
+  <!-- Header -->
+  <header>
+    <h1>Buyer Dashboard</h1>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <div class="search-container">
+          <input type="text" placeholder="Search" name="search">
+          <i class="fa-solid fa-magnifying-glass"></i>   
+        </div>
+        <li><a href="help.html">Help Center</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li class="active" id="role-link"></li>
+        <li id="auth-link"></li>
+      </ul>
+    </nav>
+  </header>
 
-            <section id="track-orders">
-                <h2>Track Orders</h2>
-                <input type="text" placeholder="Enter Order ID" id="order-id" />
-                <button onclick="trackOrder()">Track</button>
-                <div id="order-status">
-                    <!-- Order status will appear here -->
-                </div>
-            </section>
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <aside>
+      <ul>
+        <li><a href="#order-history">Order History</a></li>
+        <li><a href="#track-orders">Track Orders</a></li>
+        <li><a href="#profile-settings">Profile Settings</a></li>
+        <li><a href="#favorites">Favorites</a></li>
+      </ul>
+    </aside>
 
-            <section id="profile-settings">
-                <h2>Profile Settings</h2>
-                <form id="profile-form">
-                    <input type="text" placeholder="Full Name" id="name" required />
-                    <input type="email" placeholder="Email" id="email" required />
-                    <button type="submit">Update Profile</button>
-                </form>
-            </section>
+    <main>
+      <!-- Track Orders -->
+      <section id="track-orders">
+        <h2>Track My Orders</h2>
+        <input type="text" id="order-id" placeholder="Enter Order ID" />
+        <button id="trackOrderBtn">Track</button>
+        <div id="order-status"></div>
+      </section>
 
-            <section id="favorites">
-                <h2>Favorites</h2>
-                <ul id="favorites-list">
-                    <!-- Favorite products will appear here -->
-                </ul>
-            </section>
-        </main>
-    </div>
-    <li><a href="#" onclick="logout()">Logout</a></li>
+      <!-- Return Requests -->
+      <section class="return-requests">
+        <h2>Return Requests</h2>
+        <ul id="returnList"></ul>
+      </section>
 
-    <script>
-    function logout() {
-        localStorage.removeItem("userRole");
-        window.location.href = "index.html";
-    }
-    </script>
+      <!-- Order History -->
+      <section id="order-history">
+        <h2>Order History</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Product</th>
+              <th>Status</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody id="order-history-table">
+            <!-- Orders inserted via JavaScript -->
+          </tbody>
+        </table>
+      </section>
 
+      <!-- Profile Settings -->
+      <section id="profile-settings">
+        <h2>Profile Settings</h2>
+        <form id="profile-form">
+          <input type="text" id="name" placeholder="Full Name" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <button type="submit">Update Profile</button>
+        </form>
+      </section>
 
-    <script>
-        function loadBuyerOrders() {
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            const tableBody = document.getElementById('order-history-table');
-            tableBody.innerHTML = '';
+      <!-- Favorites -->
+      <section id="favorites">
+        <h2>Favorites</h2>
+        <ul id="favorites-list">
+          <!-- Favorite products appear here -->
+        </ul>
+      </section>
+    </main>
+  </div>
 
-            orders.forEach((order, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${order.name}</td>
-                    <td>Processing</td>
-                    <td>$${order.price} x ${order.quantity}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        function trackOrder() {
-            const orderId = document.getElementById("order-id").value;
-            const statusDiv = document.getElementById("order-status");
-            if (!orderId) {
-                statusDiv.innerHTML = '<p>Please enter a valid Order ID.</p>';
-                return;
-            }
-            statusDiv.innerHTML = `<p>Order #${orderId} is currently being processed. Estimated delivery: 2-3 days.</p>`;
-        }
-        
-
-        window.addEventListener("DOMContentLoaded", loadBuyerOrders);
-    </script>
-      
-    <script src="scripts/dashboard.js"></script>
-    <script src="scripts/navbar-role.js"></script>
-
+  <!-- Scripts -->
+  <script src="scripts/dashboard.js"></script>
+  <script src="scripts/navbar-role.js"></script>
 </body>
 </html>

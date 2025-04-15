@@ -1,45 +1,65 @@
-// Open/close modals
-document.getElementById("loginBtn").onclick = () => {
-    document.getElementById("loginModal").style.display = "block";
-  };
-  document.getElementById("signupBtn").onclick = () => {
-    document.getElementById("signupModal").style.display = "block";
-  };
-  document.querySelectorAll(".close").forEach(btn => {
-    btn.onclick = () => {
-      const target = btn.getAttribute("data-close");
-      document.getElementById(target).style.display = "none";
-    };
-  });
+// Modal Handling
+const modals = document.querySelectorAll('.modal');
+const openModalButtons = document.querySelectorAll('#loginBtn, #signupBtn');
+const closeModalButtons = document.querySelectorAll('[data-close]');
 
-  // Login form handler
-  document.getElementById("loginForm").addEventListener("submit", function (e) {
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const targetModal = button.id === 'loginBtn' ? 'loginModal' : 'signupModal';
+        document.getElementById(targetModal).style.display = 'block';
+    });
+});
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        modal.style.display = 'none';
+    });
+});
+
+// Login Submission
+const loginForm = document.getElementById('loginForm');
+loginForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    const role = document.getElementById("loginRole").value;
-    localStorage.setItem("userRole", role);
+    const email = loginForm.querySelector('input[type="email"]').value;
+    const role = document.getElementById('loginRole').value;
 
-    if (role === "buyer") {
-      window.location.href = "buyer-dashboard.html";
-    } else {
-      window.location.href = "seller-dashboard.html";
+    localStorage.setItem('userRole', role);
+    localStorage.setItem('userEmail', email);
+
+    document.getElementById('loginModal').style.display = 'none';
+    updateNavbarAndRedirect(role);
+});
+
+// Signup Submission
+const signupForm = document.getElementById('signupForm');
+signupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    alert('Sign-up successful! Please login.');
+    document.getElementById('signupModal').style.display = 'none';
+    document.getElementById('loginModal').style.display = 'block';
+});
+
+// Redirect based on role
+function updateNavbarAndRedirect(role) {
+    if (typeof updateNavbarRoleLink === 'function') updateNavbarRoleLink();
+
+    if (role === 'buyer') {
+        window.location.href = 'buyer-dashboard.html';
+    } else if (role === 'seller') {
+        window.location.href = 'seller-dashboard.html';
     }
-  });
+}
 
-  // Role switcher
-  function switchRole() {
+// BONUS: Role switcher
+function switchRole() {
     const selectedRole = document.getElementById("role-switcher").value;
     localStorage.setItem("userRole", selectedRole);
-    if (selectedRole === "buyer") {
-      window.location.href = "buyer-dashboard.html";
-    } else {
-      window.location.href = "seller-dashboard.html";
-    }
-  }
+    updateNavbarAndRedirect(selectedRole);
+}
 
-  // Optional: Auto-redirect if already logged in
-  window.addEventListener("DOMContentLoaded", () => {
-    const role = localStorage.getItem("userRole");
-    if (role === "buyer" || role === "seller") {
-      console.log("User role saved:", role);
-    }
-  });
+// Auto redirect on page load
+window.addEventListener("DOMContentLoaded", () => {
+    const role = localStorage.getItem('userRole');
+    if (role) updateNavbarAndRedirect(role);
+});

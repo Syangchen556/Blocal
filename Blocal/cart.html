@@ -13,31 +13,47 @@
         <nav>
             <ul id="nav-links">
               <li><a href="index.html">Home</a></li>
+              <div class="search-container">
+                <input type="text" placeholder="Search" name="search">
+                <i class="fa-solid fa-magnifying-glass"></i>   
+              </div>
               <li><a href="help.html">Help Center</a></li>
               <li><a href="Blog.html" class="active">Blog</a></li>
               <li id="role-link"></li>
-              <li><a href="#" onclick="logout()">Logout</a></li>
+              <li id="auth-link"></li>
             </ul>
-          
-            <!-- Moved outside the <ul> -->
-            <div class="search-container">
-              <input type="text" placeholder="Search" name="search">
-              <i class="fa-solid fa-magnifying-glass"></i>   
-            </div>
-          </nav>
-        <h1>Your Shopping Cart</h1>
+        </nav>
     </header>
 
     <main>
-        <section id="cart-items-container">
-            <h2>Your Cart</h2>
-            <ul id="cart-items">
-                <!-- Cart items will appear here -->
-            </ul>
-            <p>Total: $<span id="total-price">0.00</span></p>
-            <button id="order-btn" disabled>Place Order</button>
+        <section class="cart-container">
+            <h2 class="cart-header">Your Cart</h2>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    <!-- Dynamic rows inserted via JS -->
+                </tbody>
+            </table>
+    
+            <div class="cart-total">
+                <p>Total:</p>
+                <span class="total-price" id="total-price">$0.00</span>
+            </div>
+    
+            <div class="cart-actions">
+                <button id="order-btn" disabled>Place Order</button>
+            </div>
         </section>
     </main>
+    
 
     <footer>
         <p>&copy; 2025 Vegetable Store</p>
@@ -45,6 +61,7 @@
 
     <script src="scripts/cart.js"></script>
     <script src="scripts/navbar-role.js"></script>
+    <script src="scripts/app.js"></script>
 
     
 </body>

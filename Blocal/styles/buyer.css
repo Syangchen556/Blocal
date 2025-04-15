@@ -1,57 +1,9 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-header {
-    background-color: #2e8b57; /* Green for the theme */
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2rem;
-}
-
-nav ul {
-    list-style-type: none;
-    margin-top: 10px;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline-block;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-}
-
-nav ul li a:hover {
-    color: #ff6347; /* Tomato color for hover */
-}
-
+/* Main Dashboard Container */
 .dashboard-container {
     display: flex;
     margin-top: 80px; /* To account for the fixed header */
     padding: 20px;
+    justify-content: space-between;
 }
 
 /* Sidebar */
@@ -65,6 +17,7 @@ aside {
 
 aside ul {
     list-style-type: none;
+    padding: 0;
 }
 
 aside ul li {
@@ -87,6 +40,7 @@ main {
     padding: 20px;
 }
 
+/* Section Styles */
 section {
     margin-bottom: 30px;
     background-color: #ffffff;
@@ -99,6 +53,26 @@ section h2 {
     color: #2e8b57;
     font-size: 1.8rem;
     margin-bottom: 15px;
+}
+
+/* Add Order Form */
+.order-form input, .order-form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.order-form button {
+    background-color: #2e8b57;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-form button:hover {
+    background-color: #1d6f3a;
 }
 
 /* Order Table */
@@ -134,6 +108,39 @@ table td button:hover {
     background-color: #e5533f;
 }
 
+/* Profile Form */
+#profile-form input, #profile-form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#profile-form button {
+    background-color: #2e8b57;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#profile-form button:hover {
+    background-color: #1d6f3a;
+}
+
+/* Return Requests */
+.return-requests ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.return-requests li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
@@ -156,5 +163,10 @@ table td button:hover {
 
     main {
         margin-top: 20px;
+    }
+
+    .order-form input, .order-form button,
+    #profile-form input, #profile-form button {
+        width: 100%;
     }
 }

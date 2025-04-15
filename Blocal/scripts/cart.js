@@ -1,34 +1,179 @@
-// Handle the order functionality when placing an order
-const orderBtn = document.getElementById('order-btn');
-orderBtn.addEventListener('click', () => {
-    if (cart.length > 0) {
-        alert("Your order has been placed!");
-        cart.length = 0; // Clear the cart after the order
-        localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
-        renderCart();
-    }
-});
-
-// Render the cart when the page loads
-window.addEventListener('load', () => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push(...savedCart);
-    renderCart();
-});
-
-// Render the cart list
-function renderCart() {
-    const cartItemsElement = document.getElementById('cart-items');
+// Function to update the cart table
+function updateCart() {
+    const cartItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
-    cartItemsElement.innerHTML = '';
-    let total = 0;
+    const orderBtn = document.getElementById('order-btn');
+    
+    // Clear the current cart table rows
+    cartItemsContainer.innerHTML = '';
 
+    // Get cart items from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (cart.length === 0) {
+        // If the cart is empty, display a message
+        const emptyMessage = document.createElement('tr');
+        emptyMessage.innerHTML = `<td colspan="5" class="empty-cart">Your cart is empty!</td>`;
+        cartItemsContainer.appendChild(emptyMessage);
+        totalPriceElement.textContent = '$0.00';
+        orderBtn.disabled = true;
+        return;
+    }
+
+    // Populate the cart items table and calculate the total price
+    let totalPrice = 0;
     cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - $${item.price} x ${item.quantity}`;
-        cartItemsElement.appendChild(li);
-        total += item.price * item.quantity;
+        // Create a row for each cart item
+        const row = document.createElement('tr');
+        
+        // Product Image, Name, Quantity, Price, and Remove Button
+        row.innerHTML = `
+            <td><img src="${item.image}" alt="${item.name}" class="cart-item-img"></td>
+            <td class="item-name">${item.name}</td>
+            <td>
+                <div class="quantity-control">
+                    <button class="decrease-btn" data-id="${item.id}">-</button>
+                    <span class="quantity-display">${item.quantity}</span>
+                    <button class="increase-btn" data-id="${item.id}">+</button>
+                </div>
+            </td>
+            <td class="item-price">$${(item.price * item.quantity).toFixed(2)}</td>
+            <td><button class="remove-btn" data-id="${item.id}">Remove</button></td>
+        `;
+
+        cartItemsContainer.appendChild(row);
+
+        // Update total price
+        totalPrice += item.price * item.quantity;
     });
 
-    totalPriceElement.textContent = total.toFixed(2);
+    // Update the total price display
+    totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+
+    // Enable the order button if there are items in the cart
+    orderBtn.disabled = cart.length === 0;
+
+    // Add event listeners for quantity change and remove buttons
+    addCartEventListeners();
 }
+
+// Function to add event listeners for quantity changes and remove buttons
+function addCartEventListeners() {
+    const decreaseBtns = document.querySelectorAll('.decrease-btn');
+    const increaseBtns = document.querySelectorAll('.increase-btn');
+    const removeBtns = document.querySelectorAll('.remove-btn');
+
+    // Event listeners for decreasing quantity
+    decreaseBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productId = btn.getAttribute('data-id');
+            changeQuantity(productId, -1);
+        });
+    });
+
+    // Event listeners for increasing quantity
+    increaseBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productId = btn.getAttribute('data-id');
+            changeQuantity(productId, 1);
+        });
+    });
+
+    // Event listeners for removing items
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productId = btn.getAttribute('data-id');
+            removeFromCart(productId);
+        });
+    });
+}
+
+// Function to change the quantity of an item in the cart
+function changeQuantity(productId, change) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Find the product in the cart
+    const product = cart.find(item => item.id === productId);
+    
+    if (product) {
+        // Update the quantity
+        product.quantity += change;
+        
+        // If quantity is 0 or less, remove the item from the cart
+        if (product.quantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            // Otherwise, update the cart in localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+    }
+}
+
+// Function to remove an item from the cart
+function removeFromCart(productId) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Remove the product from the cart array
+    cart = cart.filter(item => item.id !== productId);
+
+    // Save the updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+}
+
+// Function to handle order placement
+function placeOrder() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const loggedInEmail = localStorage.getItem('userEmail'); // Get the logged-in user's email (or other identifier)
+    
+    if (cart.length === 0) {
+        alert("Your cart is empty. Please add items to the cart before placing an order.");
+        return;
+    }
+
+    const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+    // Generate a unique order ID
+    const orderId = generateOrderId();
+
+    const orderDetails = {
+        orderId: orderId,
+        email: loggedInEmail,
+        items: cart,
+        totalPrice: totalPrice.toFixed(2),
+        orderDate: new Date().toISOString(),
+        shopId: cart[0].shopId, // Assuming the cart items are from the same shop, otherwise, handle this differently
+    };
+
+    // Store the order details in localStorage for tracking
+    let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    orderHistory.push(orderDetails);
+    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+
+    // Notify the seller based on shopId
+    const shopId = orderDetails.shopId;
+    notifySeller(shopId, orderDetails);
+
+    // Clear the cart and update UI
+    localStorage.setItem('cart', JSON.stringify([])); // Empty the cart
+    updateCart(); // Re-render the cart table
+    alert(`Your order has been placed successfully! Order ID: ${orderId}`);
+}
+
+// Function to generate a unique order ID (you can modify this to match your needs)
+function generateOrderId() {
+    return 'ORD-' + new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+}
+
+// Function to notify the seller
+function notifySeller(shopId, orderDetails) {
+    // Example: You could send this data to a server or use WebSockets to notify the seller
+    console.log(`Notifying seller for shop ID ${shopId} about the new order:`, orderDetails);
+}
+
+// Add event listener for place order button
+document.getElementById('order-btn').addEventListener('click', placeOrder);
+
+// Initial call to display the cart items when the page loads
+document.addEventListener('DOMContentLoaded', updateCart);
