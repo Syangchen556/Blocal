@@ -304,12 +304,28 @@ section h2:hover {
   scrollbar-width: none;
 }
 
-/* Specific Category Colors */
+/* Category Block Design */
+.category-block {
+  background-color: #f9f9f9; /* Light background for the content */
+  padding: 20px; /* Padding around the content */
+  margin: 20px 0; /* Margin between sections */
+  border-radius: 10px; /* Rounded corners for the block */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow around the category block */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for category blocks */
+.category-block:hover {
+  transform: translateY(-5px); /* Lift the block on hover */
+  background-color: #f0f0f0; /* Slightly darker background on hover */
+}
+
+/* Specific background colors for each category block */
 .category-block:nth-child(1) {
   background-color: #FF6347; /* Tomato Red */
 }
 
-.category-block:nsth-child(2) {
+.category-block:nth-child(2) {
   background-color: #98FB98; /* Pale Green */
 }
 
@@ -318,7 +334,7 @@ section h2:hover {
 }
 
 .category-block:nth-child(4) {
-  background-color: #b45387; /* Deep Pink */
+  background-color: #FF1493; /* Deep Pink */
 }
 
 .category-block:nth-child(5) {
@@ -328,6 +344,74 @@ section h2:hover {
 .category-block:nth-child(6) {
   background-color: #8A2BE2; /* Blue Violet */
 }
+
+/* Text Styling inside Category Blocks */
+.category-block p {
+  font-size: 1rem; /* Normal text size */
+  color: #333; /* Dark text for good readability */
+  line-height: 1.6; /* Increased line height for better text spacing */
+}
+
+/*ha header design*/
+/* Section Title h4 Styles */
+h4 {
+  font-size: 1.75rem; /* Larger font size for section titles */
+  font-weight: bold; /* Bold the text */
+  color: #333; /* Default color for text */
+  text-transform: uppercase; /* Capitalize the text */
+  letter-spacing: 1px; /* Slightly increase the spacing between letters */
+  margin-bottom: 20px; /* Add space below the title */
+  text-align: center; /* Center-align the titles */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Category Block Titles (h3 or h4 depending on your structure) */
+.category-block h4 {
+  font-size: 1.5rem; /* Larger font size for category titles */
+  font-weight: bold; /* Bold the text */
+  color: #fff; /* White text color */
+  text-align: center; /* Center-align the text */
+  padding: 10px 15px; /* Add padding for spacing */
+  border-radius: 8px; /* Rounded corners for the title background */
+  text-transform: uppercase; /* Make the text uppercase */
+  letter-spacing: 1px; /* Slightly increase the letter spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for category title */
+.category-block h4:hover {
+  transform: scale(1.05); /* Slightly enlarge the title on hover */
+  background-color: #333; /* Darker background on hover */
+}
+
+/* Specific colors for each category title */
+.category-block:nth-child(1) h4 {
+  background-color: #FF6347; /* Tomato Red */
+}
+
+.category-block:nth-child(2) h4 {
+  background-color: #98FB98; /* Pale Green */
+}
+
+.category-block:nth-child(3) h4 {
+  background-color: #FFD700; /* Gold */
+}
+
+.category-block:nth-child(4) h4 {
+  background-color: #FF1493; /* Deep Pink */
+}
+
+.category-block:nth-child(5) h4 {
+  background-color: #20B2AA; /* Light Sea Green */
+}
+
+.category-block:nth-child(6) h4 {
+  background-color: #8A2BE2; /* Blue Violet */
+}
+
+
+
 
 /* Footer */
 footer {
