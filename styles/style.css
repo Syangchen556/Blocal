@@ -309,7 +309,7 @@ section h2:hover {
   background-color: #FF6347; /* Tomato Red */
 }
 
-.category-block:nth-child(2) {
+.category-block:nsth-child(2) {
   background-color: #98FB98; /* Pale Green */
 }
 
@@ -318,7 +318,7 @@ section h2:hover {
 }
 
 .category-block:nth-child(4) {
-  background-color: #FF1493; /* Deep Pink */
+  background-color: #b45387; /* Deep Pink */
 }
 
 .category-block:nth-child(5) {
