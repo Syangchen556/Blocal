@@ -59,32 +59,69 @@ main {
   font-size: 24px;
   cursor: pointer;
   z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+#addPostBtn:hover {
+  background-color: #45a049;
+}
+
+/* Smooth transition for the blog form */
+.blog-form {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.blog-form.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#addPostBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#addPostBtn:hover {
+  background-color: #218838;
 }
 
 .blog-form {
-  background: white;
-  padding: 15px;
-  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .blog-form input, .blog-form textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 .blog-form button {
-  padding: 10px 20px;
-  background: #4CAF50;
+  background-color: #007bff;
   color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.blog-form button:hover {
+  background-color: #0056b3;
 }
 
 .post {
@@ -93,6 +130,11 @@ main {
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.post:hover {
+  transform: scale(1.02);
 }
 
 .post-media {
@@ -112,6 +154,11 @@ main {
   border: none;
   cursor: pointer;
   font-size: 16px;
+  transition: color 0.3s;
+}
+
+.post-actions button:hover {
+  color: #4CAF50;
 }
 
 .comments-section {
@@ -133,4 +180,75 @@ main {
 
 .comment-item span {
   flex: 1;
+  word-wrap: break-word;
+  max-width: 90%;
+}
+
+/* === Appended Interactive Styles === */
+
+/* Active like and comment icons */
+.heart-btn i.fa-solid,
+.comment-like i.fa-solid {
+  color: #e74c3c;
+}
+
+.comment-like i.fa-solid {
+  color: #3498db;
+}
+
+/* Share button styling */
+.share-btn {
+  color: #2c3e50;
+}
+
+.share-btn:hover {
+  color: #2980b9;
+}
+
+/* Enhanced comment input field */
+.comment-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.comment-input:focus {
+  border-color: #4CAF50;
+}
+
+/* Comment like button */
+.comment-like {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.comment-like:hover {
+  color: #3498db;
+}
+
+/* Prevent overflowing content in comments */
+.comment-item span {
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 600px) {
+  .post-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .comment-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comment-like {
+    margin-top: 5px;
+  }
 }

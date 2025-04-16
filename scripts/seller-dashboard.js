@@ -128,7 +128,7 @@ function updateHomepage() {
                 <img src="${product.productImage}" alt="${product.productName}" />
                 <h3>${product.productName}</h3>
                 <p>${product.productDescription}</p>
-                <p><strong>$${product.productCost}</strong></p>
+                <p><strong>Nu.${product.productCost}</strong></p>
                 <button onclick="viewProductDetails('${product.productId}')">View Details</button>
             </div>
         `;

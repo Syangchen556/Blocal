@@ -1,26 +1,47 @@
-// Check login status from localStorage
-function isLoggedIn() {
-    return localStorage.getItem("loggedIn") === "true";
-  }
-  
-  // Blog post submission with login protection
-  document.getElementById("communityBlogForm").addEventListener("submit", function (e) {
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("communityBlogForm");
+  const blogPosts = document.getElementById("communityPosts");
+  const addPostBtn = document.getElementById("addPostBtn");
+  const blogFormSection = document.getElementById("blogFormSection");
+
+  // Show the form when the "+" button is clicked
+  addPostBtn.addEventListener("click", () => {
+    console.log("Add Post Button clicked");
+    blogFormSection.style.display = "block";
+    setTimeout(() => blogFormSection.classList.add("show"), 10);
+    addPostBtn.style.display = "none";
+  });
+
+  // Handle blog submission
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
-  
-    if (!isLoggedIn()) {
-      alert("Please log in to post.");
-      return;
-    }
-  
     const title = document.getElementById("blogTitle").value.trim();
     const author = document.getElementById("blogAuthor").value.trim() || "Anonymous";
     const content = document.getElementById("blogContent").value.trim();
     const file = document.getElementById("blogFile").files[0];
-  
+
+    // Basic validations
+    if (!title || !content) {
+      alert("Title and content are required!");
+      return;
+    }
+
+    if (file && !file.type.startsWith("image") && !file.type.startsWith("video")) {
+      alert("Only images and videos are allowed.");
+      return;
+    }
+
+    if (file && file.size > 10 * 1024 * 1024) {
+      alert("File size should be less than 10MB.");
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = function (e) {
-      const media = file ? `<${file.type.startsWith("image") ? "img" : "video controls"} src="${e.target.result}" alt="uploaded" class="post-media"/>` : "";
-  
+      const media = file
+        ? `<${file.type.startsWith("image") ? "img" : "video controls"} src="${e.target.result}" alt="uploaded" class="post-media"/>`
+        : "";
+
       const post = document.createElement("div");
       post.classList.add("post");
       post.innerHTML = `
@@ -38,21 +59,26 @@ function isLoggedIn() {
           <div class="comments-list"></div>
         </div>
       `;
-  
-      document.getElementById("communityPosts").prepend(post);
+
+      blogPosts.prepend(post);
       setupPostEvents(post);
-      document.getElementById("communityBlogForm").reset();
-      blogFormSection.style.display = "none"; // Hide form after posting
+
+      form.reset();
+
+      blogFormSection.classList.remove("show");
+      setTimeout(() => {
+        blogFormSection.style.display = "none";
+        addPostBtn.style.display = "block";
+      }, 300);
     };
-  
+
     if (file) {
       reader.readAsDataURL(file);
     } else {
       reader.onload({ target: { result: "" } });
     }
   });
-  
-  // Set up like/comment/share actions with login checks
+
   function setupPostEvents(post) {
     const heartBtn = post.querySelector(".heart-btn");
     const commentBtn = post.querySelector(".comment-btn");
@@ -62,39 +88,30 @@ function isLoggedIn() {
     const commentsList = post.querySelector(".comments-list");
     const heartCountSpan = heartBtn.querySelector("span");
     const commentCountSpan = commentBtn.querySelector("span");
-  
+
     let liked = false;
     let likeCount = 0;
     let commentCount = 0;
-  
+
     heartBtn.addEventListener("click", () => {
-      if (!isLoggedIn()) {
-        alert("Please log in to like this post.");
-        return;
-      }
-  
       liked = !liked;
       likeCount += liked ? 1 : -1;
       heartCountSpan.textContent = likeCount;
       heartBtn.querySelector("i").classList.toggle("fa-regular");
       heartBtn.querySelector("i").classList.toggle("fa-solid");
     });
-  
+
     commentBtn.addEventListener("click", () => {
       commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
     });
-  
+
     commentInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter" && commentInput.value.trim()) {
-        if (!isLoggedIn()) {
-          alert("Please log in to comment.");
-          return;
-        }
-  
         const text = commentInput.value.trim();
         const comment = document.createElement("div");
         comment.classList.add("comment-item");
         comment.innerHTML = `
+
           <span>${text}</span>
           <button class="comment-like"><i class="fa-regular fa-thumbs-up"></i> <span>0</span></button>
         `;
@@ -102,16 +119,12 @@ function isLoggedIn() {
         commentInput.value = "";
         commentCount++;
         commentCountSpan.textContent = commentCount;
-  
+
         const likeBtn = comment.querySelector(".comment-like");
         const likeSpan = likeBtn.querySelector("span");
         let likedComment = false;
+
         likeBtn.addEventListener("click", () => {
-          if (!isLoggedIn()) {
-            alert("Please log in to like comments.");
-            return;
-          }
-  
           likedComment = !likedComment;
           let count = parseInt(likeSpan.textContent);
           likeSpan.textContent = likedComment ? count + 1 : count - 1;
@@ -120,28 +133,11 @@ function isLoggedIn() {
         });
       }
     });
-  
+
     shareBtn.addEventListener("click", () => {
       const dummyLink = window.location.href + "#communityPosts";
       navigator.clipboard.writeText(dummyLink);
       alert("Post link copied to clipboard!");
     });
   }
-  
-  // Toggle blog form with login check
-  const addPostBtn = document.getElementById("addPostBtn");
-  const blogFormSection = document.getElementById("blogFormSection");
-  
-  addPostBtn.addEventListener("click", () => {
-    if (!isLoggedIn()) {
-      alert("Please log in to create a blog post.");
-      return;
-    }
-    blogFormSection.style.display = blogFormSection.style.display === "none" ? "block" : "none";
-  });
-  
-  // Optional: Disable add post button if not logged in
-  if (!isLoggedIn()) {
-    addPostBtn.title = "Log in to create a post";
-  }
-  
+});
