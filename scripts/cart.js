@@ -180,6 +180,9 @@ function clearCart() {
     // Clear the cart from localStorage
     localStorage.setItem('cart', JSON.stringify([]));
 
+    // Clear cart in app.js as well (ensure it is synchronized)
+    localStorage.setItem('cart', JSON.stringify([]));
+
     // Update the cart UI
     updateCart();
 }

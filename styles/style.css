@@ -7,6 +7,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f9f9f9;
 }
 
 /* Header */
@@ -26,6 +27,11 @@ header {
 header .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+header .logo:hover {
+  color: #ff6347; /* Logo hover effect */
 }
 
 /* Search */
@@ -44,11 +50,12 @@ header .logo {
   font-size: 18px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out, box-shadow 0.3s ease;
 }
 
 .search-container input:focus {
   width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .search-container i {
@@ -92,6 +99,38 @@ nav ul li a:hover::after {
   position: absolute;
   bottom: -4px;
   left: 20px;
+}
+
+/* Section Headings */
+section h2 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Vibrant Section Headings */
+.fruits h2 {
+  background-color: #ff6347;
+  color: white;
+}
+
+.veggies h2 {
+  background-color: #32cd32;
+  color: white;
+}
+
+.herbs h2 {
+  background-color: #9b59b6;
+  color: white;
+}
+
+section h2:hover {
+  transform: scale(1.05);
+  background-color: #ff7f50; /* Hover effect */
 }
 
 /* Intro section */
@@ -142,11 +181,12 @@ nav ul li a:hover::after {
   height: 200px;
   font-size: 15px;
   font-weight: 700;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #introbutton:hover {
   opacity: 0.7;
+  transform: scale(1.05);
 }
 
 /* Product section */
@@ -262,6 +302,31 @@ nav ul li a:hover::after {
 .product-grid {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Specific Category Colors */
+.category-block:nth-child(1) {
+  background-color: #FF6347; /* Tomato Red */
+}
+
+.category-block:nth-child(2) {
+  background-color: #98FB98; /* Pale Green */
+}
+
+.category-block:nth-child(3) {
+  background-color: #FFD700; /* Gold */
+}
+
+.category-block:nth-child(4) {
+  background-color: #FF1493; /* Deep Pink */
+}
+
+.category-block:nth-child(5) {
+  background-color: #20B2AA; /* Light Sea Green */
+}
+
+.category-block:nth-child(6) {
+  background-color: #8A2BE2; /* Blue Violet */
 }
 
 /* Footer */

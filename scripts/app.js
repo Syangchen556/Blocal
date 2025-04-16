@@ -43,7 +43,7 @@ function addOrderToList(id, name, price, image) {  // Added image parameter
         <td><img src="${image}" alt="${name}" class="order-item-img">  <!-- Display product image in order -->
         </td>
         <td>${name}</td>
-        <td>$${price}</td>
+        <td>Nu.${price}</td>
         <td>Ordered</td>
         <td><button class="return-btn">Request Return</button></td>
     `;
@@ -88,7 +88,7 @@ function renderCart() {
         const li = document.createElement('li');
         li.innerHTML = `
             <img src="${item.image}" alt="${item.name}" class="cart-item-img">  <!-- Ensure product image is shown in cart -->
-            ${item.name} - $${item.price} x ${item.quantity}
+            ${item.name} - Nu.${item.price} x ${item.quantity}
         `;
         cartItemsElement.appendChild(li);
         total += item.price * item.quantity;
@@ -109,14 +109,6 @@ function showNotification(message) {
     }, 3000);
 }
 
-// Cart Icon Count
-function updateCartIcon() {
-    const cartIcon = document.getElementById('cart-count');
-    if (cartIcon) {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartIcon.textContent = totalItems;
-    }
-}
 
 // Show Login Modal
 function showLoginModal() {
