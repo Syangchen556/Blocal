@@ -25,28 +25,26 @@ function updateCart() {
     cart.forEach(item => {
         // Create a row for each cart item
         const li = document.createElement('li');
-            li.className = 'cart-item';
-            li.innerHTML = `
+        li.className = 'cart-item';
+        li.innerHTML = `
             <img src="${item.image}" alt="${item.name}" class="cart-item-img" />
             <div class="item-details">
                 <div class="item-name">${item.name}</div>
                 <div class="item-meta">
-                <span>Qty: 
-                    <span class="quantity-control">
-                    <button class="decrease-btn" data-id="${item.id}">-</button>
-                    <span class="quantity-display">${item.quantity}</span>
-                    <button class="increase-btn" data-id="${item.id}">+</button>
+                    <span>Qty: 
+                        <span class="quantity-control">
+                            <button class="decrease-btn" data-id="${item.id}">-</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="increase-btn" data-id="${item.id}">+</button>
+                        </span>
                     </span>
-                </span>
-                <span>Price: $${item.price.toFixed(2)}</span>
-                <span>Total: $${(item.price * item.quantity).toFixed(2)}</span>
+                    <span>Price: $${item.price.toFixed(2)}</span>
+                    <span>Total: $${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
             </div>
             <button class="remove-btn" data-id="${item.id}">Remove</button>
-            `;
-
-            cartItemsContainer.appendChild(li);
-
+        `;
+        cartItemsContainer.appendChild(li);
 
         // Update total price
         totalPrice += item.price * item.quantity;
@@ -176,6 +174,18 @@ function notifySeller(shopId, orderDetails) {
     // Example: You could send this data to a server or use WebSockets to notify the seller
     console.log(`Notifying seller for shop ID ${shopId} about the new order:`, orderDetails);
 }
+
+// Function to clear the cart
+function clearCart() {
+    // Clear the cart from localStorage
+    localStorage.setItem('cart', JSON.stringify([]));
+
+    // Update the cart UI
+    updateCart();
+}
+
+// Add event listener for the "clear cart" button
+document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
 
 // Add event listener for place order button
 document.getElementById('order-btn').addEventListener('click', placeOrder);

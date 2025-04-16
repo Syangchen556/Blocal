@@ -16,9 +16,16 @@ header {
   padding: 1rem;
   text-align: center;
   z-index: 999;
-  position: relative;
+  position: sticky; /* Sticky header on scroll */
   top: 0;
   left: 0;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 /* Search */
@@ -149,6 +156,7 @@ nav ul li a:hover::after {
   gap: 1rem;
   justify-content: center;
   padding: 2rem;
+  margin: 0;
 }
 
 /* Product cards */
@@ -175,19 +183,45 @@ nav ul li a:hover::after {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Add to Cart Button */
+.add-to-cart {
+  background-color: #48bb78;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background-color: #38a15c;
+}
+
 /* Desktop */
 @media (min-width: 768px) {
   .product-grid {
     flex-wrap: wrap;
     overflow-x: visible;
   }
+
   .product-card {
     width: 220px; /* Slightly larger on desktop */
+  }
+
+  .add-to-cart {
+    width: auto;
+    font-size: 1.1rem;
   }
 }
 
 /* Mobile */
 @media (max-width: 767px) {
+  header {
+    padding: 0.5rem;
+  }
+
   #intro h2 {
     font-size: 28px;
   }
@@ -214,6 +248,11 @@ nav ul li a:hover::after {
     margin-right: 1rem;
     width: 75%;
   }
+
+  .add-to-cart {
+    width: 100%;
+    padding: 1rem;
+  }
 }
 
 /* Hide scrollbars */
@@ -229,30 +268,8 @@ nav ul li a:hover::after {
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: #4CAF50;
-  color: white;
-}
-
-/* Hover Effects */
-nav ul li a:hover {
-  color: #297954;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
-
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-
-footer {
   background-color: #333;
   color: white;
-  padding: 20px;
-  text-align: center;
 }
 
 .footer-content {
